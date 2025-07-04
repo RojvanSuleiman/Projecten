@@ -1,0 +1,154 @@
+$primary-color: #0A0F2C;
+$secondary-color: #333;
+$text-color: white;
+$border-radius: 5px;
+$breakpoint-tablet: 768px;
+
+
+%default-font {
+  font-family: Arial, sans-serif;
+  color: $text-color;
+}
+
+%dark-background {
+  background-color: black;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  @extend %default-font;
+  @extend %dark-background;
+  display: flex;
+  flex-direction: column;
+}
+
+
+header, footer {
+  background-color: $primary-color;
+  text-align: center;
+  color: $text-color;
+  padding: 1.5rem;
+}
+
+
+nav {
+  background: $secondary-color;
+  text-align: center;
+  padding: 1rem;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    li {
+      display: inline;
+
+      a {
+        color: $text-color;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px;
+
+        &:hover {
+          background: lighten($primary-color, 10%);
+          border-radius: $border-radius;
+        }
+
+        &.active {
+          border-bottom: 2px solid white;
+        }
+
+        &::after {
+          content: "";
+        }
+      }
+    }
+  }
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+
+.profile {
+  text-align: center;
+  padding: 2rem;
+
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid $text-color;
+  }
+}
+
+
+.languages {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 2rem;
+
+  img {
+    width: 80px;
+    height: auto;
+  }
+}
+
+
+.contact {
+  text-align: center;
+  padding: 2rem;
+}
+
+
+@media screen and (min-width: $breakpoint-tablet) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+@for $i from 1 through 3 {
+  .padding-#{$i} {
+    padding: 1rem * $i;
+  }
+}
+
+$themes: light, dark, blue;
+@each $theme in $themes {
+  .theme-#{$theme} {
+    background-color: if($theme == light, white, if($theme == dark, black, blue));
+    color: if($theme == light, black, white);
+  }
+}
+
+$i: 1;
+@while $i < 4 {
+  .m-left-#{$i} {
+    margin-left: $i * 10px;
+  }
+  $i: $i + 1;
+}
