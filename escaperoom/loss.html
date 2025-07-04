@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> <!-- use UTF-8 encoding for special characters -->
+  <title>You Lost — Try Again</title> <!-- shows in the browser tab -->
+
+  <style>
+    /* remove default margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* background and base settings */
+    html, body {
+      height: 100%;
+      overflow: hidden; /* no scrolling */
+      font-family: 'Segoe UI', sans-serif;
+      background: url('kurdistan.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* the background video on the left side */
+    video#bg-video {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) scale(0.7); /* center and shrink a bit */
+      height: 120%;
+      width: auto;
+      object-fit: contain;
+      z-index: 1; /* send behind text */
+    }
+
+    /* the white text box on the right */
+    .overlay {
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
+      text-align: left;
+      color: white;
+      z-index: 2; /* on top of video */
+      max-width: 500px;
+    }
+
+    /* big title */
+    .overlay h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+
+    /* message paragraph */
+    .overlay p {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    /* buttons (try again + logout) */
+    .overlay a {
+      text-decoration: none;
+      background: #666;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      margin-right: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- video that plays when user clicks anywhere -->
+  <video id="bg-video" playsinline>
+    <source src="lost.mp4" type="video/mp4"> <!-- video that shows after losing -->
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- box with text and buttons -->
+  <div class="overlay">
+    <h1>❌ You Didn’t Make It</h1>
+    <p>Don’t give up.<br>Do not let them get to you, do not let them win.</p>
+    <a href="home.php">Try Again</a> <!-- go back and start again -->
+    <a href="logout.php">Logout</a> <!-- log out the player -->
+  </div>
+
+  <!-- JS to play video on first click -->
+  <script>
+    const video = document.getElementById('bg-video'); // grab the video
+    document.addEventListener('click', () => {
+      video.muted = false; // unmute
+      video.play(); // play video
+    }, { once: true }); // only on first click
+  </script>
+</body>
+</html>
